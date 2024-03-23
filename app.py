@@ -12,7 +12,7 @@ app = Flask(__name__)
 load_dotenv()
 r = redis.Redis(host=os.getenv("DB_HOST"), port=os.getenv("DB_PORT"), decode_responses=True)
 
-CORS(app, origins=['http://localhost:8080', 'http://localhost:8080/url'], allow_headers=["Content-Type", "Authorization", "Access-Control-Allow-Credentials"],
+CORS(app, origins=['http://localhost:5173', 'http://localhost:5173/url'], allow_headers=["Content-Type", "Authorization", "Access-Control-Allow-Credentials"],
 supports_credentials=True)
 
 @app.route('/url', methods=['POST'])
