@@ -8,12 +8,11 @@ import os
 
 app = Flask(__name__)
 
-# load_dotenv('.env.dev')
+#load_dotenv('.env.dev')
 load_dotenv()
 r = redis.Redis(host=os.getenv("DB_HOST"), port=os.getenv("DB_PORT"), decode_responses=True)
 
-CORS(app, origins=['http://localhost:5173', 'http://localhost:5173/url', 'https://url-shortener-frontend-6tel.onrender.com/', 'https://url-shortener-frontend-6tel.onrender.com/url'], allow_headers=["Content-Type", "Authorization", "Access-Control-Allow-Credentials"],
-supports_credentials=True)
+CORS(app, origins=os.getenv("FRONTEND_URL"), supports_credentials=True)
 
 @app.route('/url', methods=['POST'])
 def create_url():
