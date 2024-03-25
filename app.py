@@ -7,13 +7,13 @@ import string
 
 app = Flask(__name__)
 
-env_var = dotenv_values(".env")
+secrets = dotenv_values(".env")
 
-# print(env_var["DB_HOST"], env_var["DB_PORT"], env_var["FRONTEND_URL"])
+print(secrets["DB_HOST"], secrets["DB_PORT"], secrets["FRONTEND_URL"])
 
-r = redis.Redis(host=env_var["DB_HOST"], port=env_var["DB_PORT"], decode_responses=True)
+r = redis.Redis(host=secrets["DB_HOST"], port=secrets["DB_PORT"], decode_responses=True)
 
-CORS(app, origins=[env_var["FRONTEND_URL"], env_var["FRONTEND_URL_DEV"]], supports_credentials=True)
+CORS(app, origins=[secrets["FRONTEND_URL"], secrets["FRONTEND_URL_DEV"]], supports_credentials=True)
 
 @app.route('/url', methods=['POST'])
 def create_url():
