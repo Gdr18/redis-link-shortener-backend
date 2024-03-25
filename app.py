@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 r = redis.Redis(host=os.getenv("DB_HOST"), port=os.getenv("DB_PORT"), decode_responses=True)
 
-CORS(app, origins=[os.getenv("FRONTEND_URL"), os.getenv("FRONTEND_URL_DEV")], supports_credentials=True)
+CORS(app, origins=os.getenv("FRONTEND_URL"), supports_credentials=True)
 
 @app.route('/url', methods=['POST'])
 def create_url():
