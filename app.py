@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 env_var = dotenv_values(".env")
 
-print(env_var["DB_HOST"], env_var["DB_PORT"], env_var["FRONTEND_URL"])
+# print(env_var["DB_HOST"], env_var["DB_PORT"], env_var["FRONTEND_URL"])
 
 r = redis.Redis(host=env_var["DB_HOST"], port=env_var["DB_PORT"], decode_responses=True)
 
