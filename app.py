@@ -13,7 +13,6 @@ app = Flask(__name__)
 r = redis.Redis(host=os.getenv("DB_HOST"), port=os.getenv("DB_PORT"), decode_responses=True)
 
 CORS(app, resources={r'/*': {'origins': [os.getenv("FRONTEND_URL_DEV"), os.getenv("FRONTEND_URL")]}})
-# CORS(app, origins=os.getenv("FRONTEND_URL"), supports_credentials=True)
 
 @app.route('/url', methods=['POST'])
 def create_url():
