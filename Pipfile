@@ -7,10 +7,10 @@ name = "pypi"
 redis = "*"
 flask-cors = "*"
 flask = "*"
-python-dotenv = "*"
 gunicorn = "*"
 
 [dev-packages]
+python-dotenv = "*"
 
 [requires]
 python_version = "3.11"

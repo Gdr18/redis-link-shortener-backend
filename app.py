@@ -1,15 +1,19 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from dotenv import load_dotenv
 import redis
 import random
 import string
 import os
 
+load_dotenv('.env.dev')
+
 app = Flask(__name__)
 
 r = redis.Redis(host=os.getenv("DB_HOST"), port=os.getenv("DB_PORT"), decode_responses=True)
 
-CORS(app, origins=os.getenv("FRONTEND_URL"), supports_credentials=True)
+CORS(app, resources={r'/*': {'origins': [os.getenv("FRONTEND_URL_DEV"), os.getenv("FRONTEND_URL")]}})
+# CORS(app, origins=os.getenv("FRONTEND_URL"), supports_credentials=True)
 
 @app.route('/url', methods=['POST'])
 def create_url():
