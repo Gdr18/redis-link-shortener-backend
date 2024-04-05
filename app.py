@@ -39,7 +39,7 @@ def get_url(url_acortada):
 
 @app.route('/url/<url_acortada>', methods=['DELETE'])
 def delete_url(url_acortada):
-    url_acortada2 = 'https://' + url_acortada + '/es/lesson/3/'
+    url_acortada2 = 'https://' + url_acortada + '/in/g%C3%A1dor-garc%C3%ADa-mart%C3%ADnez-99a33717b/'
     r.delete(url_acortada2)
     return 'Success'
 
