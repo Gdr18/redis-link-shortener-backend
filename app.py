@@ -39,7 +39,7 @@ def get_url(url_acortada):
 
 @app.route('/url/<url_acortada>', methods=['DELETE'])
 def delete_url(url_acortada):
-    url_acortada2 = 'https://' + url_acortada
+    url_acortada2 = 'https://' + url_acortada + '/'
     r.delete(url_acortada2)
     return 'Success'
 
