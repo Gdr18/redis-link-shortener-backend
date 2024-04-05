@@ -18,8 +18,13 @@ CORS(app, resources={r'/*': {'origins': [os.getenv("FRONTEND_URL_DEV"), os.geten
 def create_url():
     characters = string.ascii_letters + string.digits
     url_original = request.json['urlOriginal']
-    r.set(url_original, ''.join(random.choice(characters) for i in range(15)))
-    url_acortada = { 'urlAcortada': r.get(url_original) }
+
+    for key in r.scan_iter():
+      if r.get(key) == url_original:
+            return jsonify(key)
+        
+    url_acortada = ''.join(random.choice(characters) for i in range(15))
+    r.set(url_acortada, url_original)
     return jsonify(url_acortada)
 
 @app.route('/urls', methods=['GET'])
@@ -27,19 +32,14 @@ def get_urls():
     urls  = list(map(lambda key: { key: r.get(key) }, r.keys()))
     return jsonify(urls)
 
-# Hay que quitar 'https://' para hacer la solicitud, sino no funcionará.
-@app.route('/url/<url_original>', methods=['GET'])
-def get_url(url_original):
-    url_original = 'https://' + url_original
-    print(url_original)
-    url_acortada = r.get(url_original)
-    return url_acortada
+@app.route('/url/<url_acortada>', methods=['GET'])
+def get_url(url_acortada):
+    url_original = r.get(url_acortada)
+    return jsonify(url_original)
 
-# Hay que quitar 'https://' para hacer la solicitud, sino no funcionará.
-@app.route('/url/<url_original>', methods=['DELETE'])
-def delete_url(url_original):
-    url_original = 'https://' + url_original
-    r.delete(url_original)
+@app.route('/url/<url_acortada>', methods=['DELETE'])
+def delete_url(url_acortada):
+    r.delete(url_acortada)
     return 'Success'
 
 if __name__ == "__main__":

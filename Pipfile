@@ -4,9 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-redis = "*"
-flask-cors = "*"
 flask = "*"
+flask-cors = "*"
+redis = "*"
 gunicorn = "*"
 
 [dev-packages]
