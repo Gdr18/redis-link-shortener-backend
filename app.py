@@ -39,8 +39,11 @@ def get_url(url_acortada):
 
 @app.route('/url/<url_acortada>', methods=['DELETE'])
 def delete_url(url_acortada):
-    r.delete(url_acortada)
-    return 'Success'
+    if r.exists(url_acortada):
+        r.delete(url_acortada)
+        return 'Success'
+    else:
+        return 'Not found'
 
 if __name__ == "__main__":
     app.run(debug=True)
