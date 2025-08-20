@@ -11,15 +11,15 @@ load_dotenv('.env.prod')
 app = Flask(__name__, static_folder="")
 
 r = redis.Redis(
-	host=os.getenv("DB_HOST"),
-	port=os.getenv("DB_PORT"),
+	host=os.getenv("DB_HOST", "localhost"),
+	port=os.getenv("DB_PORT", 6379),
 	decode_responses=True,
 	username=os.getenv("DB_USERNAME", None),
 	password=os.getenv("DB_PASSWORD", None)
 )
 
 CORS(app, resources={
-	r'/*': {'origins': [os.getenv("FRONTEND_URL_DEV"), os.getenv("FRONTEND_URL"), os.getenv("FRONTEND_URL_PROD")]}})
+	r'/*': {'origins': [os.getenv("FRONTEND_MODE_DEV", "http://localhost:5173"), os.getenv("FRONTEND_PROD", None), os.getenv("FRONTEND_MODE_PROD", "http://localhost:4173")]}})
 
 
 @app.route('/')
@@ -63,4 +63,4 @@ def delete_url(url_acortada):
 
 
 if __name__ == '__main__':
-	app.run(debug=True if not os.getenv("DB_USERNAME") else False, port=int(os.getenv("PORT", 3000)))
+	app.run(debug=True if not os.getenv("DB_HOST") else False, port=int(os.getenv("FLASK_PORT", 3000)))
