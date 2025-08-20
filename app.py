@@ -8,9 +8,15 @@ import os
 
 load_dotenv('.env.prod')
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="")
 
-r = redis.Redis(host=os.getenv("DB_HOST"), port=os.getenv("DB_PORT"), decode_responses=True)
+r = redis.Redis(
+	host=os.getenv("DB_HOST"),
+	port=os.getenv("DB_PORT"),
+	decode_responses=True,
+	username=os.getenv("DB_USERNAME", None),
+	password=os.getenv("DB_PASSWORD", None)
+)
 
 CORS(app, resources={
 	r'/*': {'origins': [os.getenv("FRONTEND_URL_DEV"), os.getenv("FRONTEND_URL"), os.getenv("FRONTEND_URL_PROD")]}})
@@ -18,18 +24,13 @@ CORS(app, resources={
 
 @app.route('/')
 def welcome():
-	return jsonify('Bienvenidx a la API REST de URL Shortener'), 200
-
-
-@app.route('/keep-alive')
-def keep_alive():
-	return jsonify('Keep Alive URL Shortener realizado de forma satisfactoria'), 200
+	return 'Bienvenidx a la API REST de URL Shortener'
 
 
 @app.route('/url', methods=['POST'])
 def create_url():
 	characters = string.ascii_letters + string.digits
-	url_original = request.json['urlOriginal']
+	url_original = request.get_json().get('urlOriginal')
 
 	for key in r.scan_iter():
 		if r.get(key) == url_original:
@@ -62,4 +63,4 @@ def delete_url(url_acortada):
 
 
 if __name__ == '__main__':
-	app.run(debug=True)
+	app.run(debug=True if not os.getenv("DB_USERNAME") else False, port=int(os.getenv("PORT", 3000)))
