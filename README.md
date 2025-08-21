@@ -56,7 +56,7 @@ DB_USERNAME = tu_nombre_de_usuario_de_redis # [OPCIONAL] En el caso de que tenga
 FRONTEND_PROD = tu_url_de_producción # [OPCIONAL] En el caso de que el frontend lo tengas desplegado en la nube.
 FRONTEND_MODE_DEV = tu_url_modo_desarrollo # [OPCIONAL] En el caso de que utilices frontend en entorno local.
 FRONTEND_MODE_PROD = tu_url_modo_producción # [OPCIONAL] En el caso de que utilices frontend en entorno local.
-FLASK_PORT = 3000 # [OPCIONAL] O el puerto flask que desees.
+PORT = 3000 # [OPCIONAL] O el puerto flask que desees.
 ```
 5. Asegúrate de tener Redis ejecutándose en tu sistema local o desplegado en la nube.
 
