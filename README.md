@@ -6,7 +6,7 @@ Backend de Redis Link Shortener (acortador de URLs). Proyecto construido con **F
   <img src='https://github.com/Gdr18/Url_Shortener_Frontend/assets/118227919/f1ec58ae-b08e-4c36-9b48-e1f791c979a4' alt='redis_link_shortener_gif' width='50%'></img>
 </p>
 <p  align='center'>
-  <a href="https://url-shortener-backend-5rxc.onrender.com">Deploy (Render)</a>
+  <a href="https://redis-link-shortener-backend.fly.dev">Deploy (Fly.io)</a>
 </p><br>
 
 ---
