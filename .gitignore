@@ -1,9 +1,0 @@
-Pipfile.lock
-dump.rdb
-.env.prod
-.env.dev
-.idea/
-.vscode/
-__pycache__/
-.gitignore
-Pipfile
